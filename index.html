@@ -1,419 +1,105 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html><html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Хупри Джамаат — Закят и Новости</title>
-
-  <!-- Стили -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Хупри Джамаат</title>
   <style>
-    :root {
-      --bg: #f5f5f5;
-      --text: #222;
-      --primary: #5d9fff;
-      --accent: #b8dcff;
-      --dark-bg: #1c1c1c;
-      --dark-text: #eee;
-      --error: #e74c3c;
-      --success: #27ae60;
-    }
-
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }header {
+  background-image: url('hupri-mosque.jpg'); /* заменить на актуальное фото села Хупри */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 80px 20px 60px;
+  position: relative;
+}
 
-    body.dark {
-      background: var(--dark-bg);
-      color: var(--dark-text);
-    }
+.bismillah {
+  font-family: 'Scheherazade', serif;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 20px;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+.hupri-title {
+  font-size: 28px;
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.4);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
-      user-select: none;
-    }
+main {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-    nav {
-      flex-grow: 1;
-      margin-left: 2rem;
-    }
+h2 {
+  font-size: 24px;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 10px;
+}
 
-    .nav ul {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+.niyat {
+  margin-bottom: 30px;
+}
 
-    .nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
+.arabic {
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  color: #444;
+}
 
-    .nav a:hover,
-    .nav a:focus {
-      color: #ffe066;
-    }
+.translation {
+  margin-top: 10px;
+  font-size: 16px;
+}
 
-    .burger {
-      display: none;
-      font-size: 2rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: white;
-      user-select: none;
-    }
+footer {
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #f7f7f7;
+  color: #d4af37;
+  font-size: 18px;
+}
 
-    .theme-toggle {
-      cursor: pointer;
-      font-size: 1.5rem;
-      user-select: none;
-      color: white;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-    .theme-toggle:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    main {
-      flex-grow: 1;
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      width: 100%;
-    }
-
-    section {
-      margin-bottom: 3rem;
-      background: white;
-      padding: 1.5rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark section {
-      background: #2c2c2c;
-      color: var(--dark-text);
-      box-shadow: 0 5px 15px rgb(0 0 0 / 0.5);
-    }
-
-    h2 {
-      margin-top: 0;
-      border-bottom: 3px solid var(--primary);
-      padding-bottom: 0.3rem;
-    }
-
-    /* Новости — слайдер */
-    #news-slider {
-      margin-top: 1rem;
-    }
-
-    .splide__slide {
-      background: var(--accent);
-      color: #222;
-      padding: 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      user-select: none;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    }
-
-    body.dark .splide__slide {
-      background: #444f6e;
-      color: var(--dark-text);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.7);
-    }
-
-    /* Список пастухов */
-    ol {
-      padding-left: 1.3rem;
-    }
-
-    .schedule {
-      margin-top: 1rem;
-      font-style: italic;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    /* Калькулятор Закята */
-    #zakat-calculator {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 400px;
-      margin-top: 1rem;
-    }
-
-    #zakat-calculator label {
-      font-weight: 600;
-    }
-
-    #zakat-calculator input {
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    #zakat-calculator input:focus {
-      border-color: var(--primary);
-    }
-
-    #calculate-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.7rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-    }
-    #calculate-btn:hover {
-      background: #4a87e0;
-    }
-
-    #result {
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
-    /* Ошибка */
-    #result.error {
-      color: var(--error);
-    }
-
-    /* Успех */
-    #result.success {
-      color: var(--success);
-    }
-
-    /* Адаптив для мобилок */
-    @media (max-width: 768px) {
-      .burger {
-        display: block;
-      }
-      nav {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--primary);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        border-radius: 0 0 10px 10px;
-        z-index: 99;
-      }
-      nav.open {
-        max-height: 300px;
-      }
-      .nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 0;
-      }
-      .nav a {
-        color: white;
-        font-size: 1.2rem;
-      }
-      main {
-        margin: 1rem;
-      }
-    }
   </style>
-
-  <!-- Splide (слайдер) CSS и AOS -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Montserrat:wght@400;700&family=Scheherazade&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <div class="logo">Хупри Джамаат</div>
-    <button class="burger" aria-label="Меню">&#9776;</button>
-    <nav class="nav" aria-label="Основная навигация">
-      <ul>
-        <li><a href="#news">Новости</a></li>
-        <li><a href="#tarik">Тарикь Гъуро Посу</a></li>
-        <li><a href="#zakat">Закят</a></li>
-      </ul>
-    </nav>
-    <div class="theme-toggle" role="button" aria-label="Переключить тему">🌓</div>
-  </header>
+    <div class="bismillah">بِسْمِ ٱللّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+    <div class="hupri-title">Хупри Джамаат</div>
+  </header>  <main>
+    <h2>Нияты по Шафиитскому мазхабу</h2><div class="niyat">
+  <h3>Ният за себя</h3>
+  <div class="arabic">بِسْمِ اللهِ، اللهُ أَكْبَرُ، اللَّهُمَّ هذِهِ مِنْكَ وَلَكَ، هذِهِ عَنِّي، اللَّهُمَّ تَقَبَّلْ مِنِّي</div>
+  <div class="translation">Во имя Аллаха. Аллах — Велик. О Аллах, эта жертва от Тебя и для Тебя. Это — за меня. О Аллах, прими её от меня.</div>
+</div>
 
-  <main>
-    <section id="news" data-aos="fade-up" data-aos-duration="800">
-      <h2>Новости</h2>
-      <div id="news-slider" class="splide">
-        <div class="splide__track">
-          <ul class="splide__list">
-            <li class="splide__slide">
-              <img src="https://picsum.photos/id/1015/600/300" alt="Новость 1" style="width:100%; border-radius:8px; margin-bottom:0.5rem;" />
-              <strong>Праздник Курбан Байрам</strong>
-              <p>В этом году праздник будет проходить с соблюдением всех санитарных норм.</p>
-            </li>
-            <li class="splide__slide">
-              <img src="https://picsum.photos/id/1035/600/300" alt="Новость 2" style="width:100%; border-radius:8px; margin-bottom:0.5rem;" />
-              <strong>Новый молочный павильон</strong>
-              <p>Наше сообщество теперь имеет новый павильон для сбора и переработки молока.</p>
-            </li>
-            <li class="splide__slide">
-              <img src="https://picsum.photos/id/1067/600/300" alt="Новость 3" style="width:100%; border-radius:8px; margin-bottom:0.5rem;" />
-              <strong>Волонтёрская помощь</strong>
-              <p>Спасибо всем волонтёрам, которые помогают нуждающимся в нашем районе.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<div class="niyat">
+  <h3>Ният за семью</h3>
+  <div class="arabic">اللَّهُمَّ هذِهِ عَنِّي وَعَنْ أَهْلِ بَيْتِي</div>
+  <div class="translation">О Аллах, эта жертва — за меня и за мою семью.</div>
+</div>
 
-    <section id="tarik" data-aos="fade-up" data-aos-duration="800">
-      <h2>Тарикь Гъуро Посу</h2>
-      <ol>
-        <li>Иванов Иван — 3 головы</li>
-        <li>Петров Петр — 2 головы</li>
-        <li>Смирнова Ольга — 1 голова</li>
-      </ol>
-      <div class="schedule">Сегодня пасти: <strong>Иванов Иван</strong></div>
-    </section>
+<div class="niyat">
+  <h3>Ният за покойного</h3>
+  <div class="arabic">اللَّهُمَّ هذِهِ عَنْ فُلَانٍ، اللَّهُمَّ تَقَبَّلْ عَنْهُ</div>
+  <div class="translation">О Аллах, эта жертва — за [имя умершего]. О Аллах, прими её за него.</div>
+</div>
 
-    <section id="zakat" data-aos="fade-up" data-aos-duration="800">
-      <h2>Калькулятор Закята</h2>
-      <p>Введите количество голов скота (крупного рогатого животного), чтобы рассчитать сумму Закята:</p>
-
-      <form id="zakat-calculator">
-        <label for="cattle-count">Количество голов:</label>
-        <input type="number" id="cattle-count" min="0" step="1" placeholder="Введите число" required />
-
-        <button type="submit" id="calculate-btn">Рассчитать Закят</button>
-
-        <div id="result" aria-live="polite"></div>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <p style="text-align:center; padding:1rem 0; color:#666; font-size:0.9rem;">
-      © 2025 Хупри Джамаат — Сделано с ❤️ Али
-    </p>
+  </main>  <footer>
+    Хупри Джамаат – 2025
   </footer>
-
-  <!-- Скрипты -->
-  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Инициализация слайдера
-      new Splide('#news-slider', { type: 'loop', perPage: 1, autoplay: true, interval: 4000 }).mount();
-
-      // Инициализация анимаций
-      AOS.init();
-
-      // Тема (светлая/тёмная)
-      const toggle = document.querySelector('.theme-toggle');
-      toggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        localStorage.setItem(
-          'theme',
-          document.body.classList.contains('dark') ? 'dark' : 'light'
-        );
-      });
-      if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark');
-      }
-
-      // Бургер меню
-      const burger = document.querySelector('.burger');
-      const nav = document.querySelector('.nav');
-      burger.addEventListener('click', () => {
-        nav.classList.toggle('open');
-      });
-
-      // Калькулятор Закята
-      const form = document.getElementById('zakat-calculator');
-      const input = document.getElementById('cattle-count');
-      const resultDiv = document.getElementById('result');
-
-      // Правила Закята на скот: 
-      // 1 голова < 30 - 1 овца = 10 у.е. (условных)
-      // 30-39 - 1 корова = 50 у.е.
-      // 40-59 - 2 коровы = 100 у.е.
-      // 60+ - 3 коровы = 150 у.е.
-      // Просто пример, реальные суммы уточняй
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const count = parseInt(input.value);
-
-        if (isNaN(count) || count < 0) {
-          resultDiv.textContent = 'Введите корректное количество голов.';
-          resultDiv.className = 'error';
-          return;
-        }
-        if (count === 0) {
-          resultDiv.textContent = 'Закят за 0 голов не требуется.';
-          resultDiv.className = 'success';
-          return;
-        }
-
-        let zakat = 0;
-        let zakatText = '';
-
-        if (count < 30) {
-          zakat = count * 10; // 1 овца по 10 у.е.
-          zakatText = `Закят: ${count} овец, общая сумма — ${zakat} у.е.`;
-        } else if (count < 40) {
-          zakat = 50;
-          zakatText = 'Закят: 1 корова, сумма — 50 у.е.';
-        } else if (count < 60) {
-          zakat = 100;
-          zakatText = 'Закят: 2 коровы, сумма — 100 у.е.';
-        } else {
-          zakat = 150;
-          zakatText = 'Закят: 3 коровы, сумма — 150 у.е.';
-        }
-
-        resultDiv.textContent = zakatText;
-        resultDiv.className = 'success';
-      });
-    });
-  </script>
 </body>
 </html>
