@@ -183,58 +183,6 @@
             box-shadow: 0 8px 20px rgba(249, 168, 37, 0.6);
         }
 
-        .map-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 500px;
-            background: #f0f0f0;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .map-overlay {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .map-overlay h3 {
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-
         /* Галерея */
         .gallery {
             padding: 80px 0;
@@ -449,6 +397,8 @@
             padding: 30px;
             position: relative;
             animation: modalIn 0.5s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close-modal {
@@ -506,6 +456,44 @@
         .btn-block {
             display: block;
             width: 100%;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         /* Футер */
@@ -657,10 +645,6 @@
                 font-size: 1.1rem;
             }
             
-            .map-container {
-                height: 400px;
-            }
-            
             .news-container {
                 grid-template-columns: 1fr;
             }
@@ -677,10 +661,6 @@
             
             .gallery-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .map-container {
-                height: 300px;
             }
         }
 
@@ -757,20 +737,6 @@
         </div>
     </section>
 
-    <!-- Карта -->
-    <section class="map-section">
-        <div class="container">
-            <h2 class="section-title">Наше расположение</h2>
-            <div class="map-container">
-                <div class="map-overlay">
-                    <h3>Село Хупри</h3>
-                    <p>Цунтинский район, Дагестан</p>
-                    <p>Координаты: 42.2297° N, 45.9571° E</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Галерея -->
     <section class="gallery" id="gallery">
         <div class="container">
@@ -781,49 +747,8 @@
                 <button class="filter-btn" data-filter="houses">Дома</button>
                 <button class="filter-btn" data-filter="traditions">Традиции</button>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item" data-category="mountains">
-                    <img src="https://images.unsplash.com/photo-1542662565-7e4b66bae529?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Горы Дагестана">
-                    <div class="overlay">
-                        <h3>Кавказские горы</h3>
-                        <p>Вид на окрестности села</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="houses">
-                    <img src="https://images.unsplash.com/photo-1593692909680-1e6a516a49cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Традиционный дом">
-                    <div class="overlay">
-                        <h3>Традиционный дом</h3>
-                        <p>Архитектура села Хупри</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="traditions">
-                    <img src="https://images.unsplash.com/photo-1559715541-5daf8a0296d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Местные традиции">
-                    <div class="overlay">
-                        <h3>Национальные узоры</h3>
-                        <p>Искусство и ремёсла</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="mountains">
-                    <img src="https://images.unsplash.com/photo-1596466596120-2a8e4b5dddb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Горный пейзаж">
-                    <div class="overlay">
-                        <h3>Горная река</h3>
-                        <p>Природные красоты</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="traditions">
-                    <img src="https://images.unsplash.com/photo-1580338453350-edaefe890e0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Национальная кухня">
-                    <div class="overlay">
-                        <h3>Традиционная кухня</h3>
-                        <p>Блюда Дагестана</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="houses">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Улицы села">
-                    <div class="overlay">
-                        <h3>Улочки Хупри</h3>
-                        <p>Серпантинные дороги</p>
-                    </div>
-                </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Галерея будет заполняться через JavaScript -->
             </div>
         </div>
     </section>
@@ -842,7 +767,7 @@
     <section class="about" id="about">
         <div class="container">
             <h2 class="section-title">О нашем селе</h2>
-            <div class="about-content">
+            <div class="about-content" id="aboutContent">
                 <p>Село Хупри расположено в живописных горах Цунтинского района Дагестана. Это место удивительной природной красоты, где горные вершины касаются небес, а чистый воздух наполняет силой и энергией.</p>
                 <p>Жители села исповедуют ислам, который играет важную роль в культурной и общественной жизни. Традиции и обычаи передаются из поколения в поколение, сохраняя уникальную идентичность нашего народа.</p>
                 <p>Хупри славится своими гостеприимными жителями, традиционными ремёслами и уникальной кухней. Каждый уголок этого села пропитан историей и духом горного Дагестана.</p>
@@ -861,39 +786,29 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Цунтинский район, Дагестан, Россия</span>
                     </div>
-                    <div class="contact">
-                        <i class="fas fa-coordinates"></i>
-                        <span>42.2297° N, 45.9571° E</span>
-                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Исламский календарь</h3>
-                    <p>Текущая дата по хиджре: <span id="hijriDate">15 Мухаррам 1445 г.</span></p>
+                    <p>Текущая дата по хиджре: <span id="hijriDate">15 Мухаррам 1446 г.</span></p>
                     <p>Ближайший праздник: Ураза-Байрам</p>
-                    <div class="contact">
-                        <i class="fas fa-mosque"></i>
-                        <span>Местная мечеть: Джума-мечеть Хупри</span>
-                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Свяжитесь с нами</h3>
-                    <p>Если у вас есть вопросы или предложения, напишите нам:</p>
-                    <div class="contact">
-                        <i class="fas fa-envelope"></i>
-                        <span>info@khupri-dag.ru</span>
-                    </div>
                     <div class="socials">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/79606662854" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
+                    <p>WhatsApp: +7 (960) 666-28-54</p>
                 </div>
             </div>
             <div class="copyright">
+                <p style="font-size: 1.5rem; margin-bottom: 10px; direction: rtl; font-family: 'Times New Roman', serif;">
+                    وَالأَرْضَ مَدَدْنَاهَا وَأَلْقَيْنَا فِيهَا رَوَاسِيَ وَأَنبَتْنَا فِيهَا مِن كُلِّ شَيْءٍ مَّوْزُونٍ
+                </p>
                 <p>«И землю Мы распростерли, и бросили на нее незыблемые горы, и взрастили на ней в меру всякие вещи»</p>
-                <p>Коран, сура Аль-Хиджр, аят 19</p>
-                <p style="margin-top: 15px;">© 2023 Село Хупри. Все права защищены.</p>
+                <p>Священный Коран, сура Аль-Хиджр, аят 19</p>
+                <p style="margin-top: 15px;">© 2025 Село Хупри. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -924,72 +839,147 @@
         </div>
     </div>
 
-    <!-- Модальное окно добавления новости -->
-    <div class="modal" id="addNewsModal">
+    <!-- Модальное окно управления сайтом -->
+    <div class="modal" id="adminPanelModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeNews">&times;</span>
-            <h2 style="margin-bottom: 20px;">Добавить новость</h2>
-            <form id="newsForm">
-                <div class="form-group">
-                    <label for="newsTitle">Заголовок</label>
-                    <input type="text" id="newsTitle" class="form-control" required>
+            <span class="close-modal" id="closeAdmin">&times;</span>
+            <h2 style="margin-bottom: 20px;">Панель управления сайтом</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="news">Новости</button>
+                <button class="tab-btn" data-tab="gallery">Галерея</button>
+                <button class="tab-btn" data-tab="about">О селе</button>
+                <button class="tab-btn" data-tab="settings">Настройки</button>
+            </div>
+            
+            <!-- Управление новостями -->
+            <div class="tab-content active" id="newsTab">
+                <h3>Добавить новость</h3>
+                <form id="newsForm">
+                    <div class="form-group">
+                        <label for="newsTitle">Заголовок</label>
+                        <input type="text" id="newsTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsCategory">Категория</label>
+                        <select id="newsCategory" class="form-control" required>
+                            <option value="События">События</option>
+                            <option value="Религия">Религия</option>
+                            <option value="Природа">Природа</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsTags">Теги (через запятую)</label>
+                        <input type="text" id="newsTags" class="form-control" placeholder="халяль, джума-намаз, свадьбы">
+                    </div>
+                    <div class="form-group">
+                        <label for="newsContent">Текст новости</label>
+                        <textarea id="newsContent" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsImage">Загрузить фото</label>
+                        <input type="file" id="newsImage" class="form-control" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-block">Добавить новость</button>
+                </form>
+                
+                <h3 style="margin-top: 30px;">Управление новостями</h3>
+                <div id="newsManagement">
+                    <!-- Список новостей для управления -->
                 </div>
-                <div class="form-group">
-                    <label for="newsCategory">Категория</label>
-                    <select id="newsCategory" class="form-control" required>
-                        <option value="События">События</option>
-                        <option value="Религия">Религия</option>
-                        <option value="Природа">Природа</option>
-                    </select>
+            </div>
+            
+            <!-- Управление галереей -->
+            <div class="tab-content" id="galleryTab">
+                <h3>Добавить фото в галерею</h3>
+                <form id="galleryForm">
+                    <div class="form-group">
+                        <label for="galleryCategory">Категория</label>
+                        <select id="galleryCategory" class="form-control" required>
+                            <option value="mountains">Горы</option>
+                            <option value="houses">Дома</option>
+                            <option value="traditions">Традиции</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="galleryTitle">Название</label>
+                        <input type="text" id="galleryTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="galleryDescription">Описание</label>
+                        <textarea id="galleryDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="galleryImage">Загрузить фото</label>
+                        <input type="file" id="galleryImage" class="form-control" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-block">Добавить в галерею</button>
+                </form>
+                
+                <h3 style="margin-top: 30px;">Управление галереей</h3>
+                <div id="galleryManagement">
+                    <!-- Список фото для управления -->
                 </div>
-                <div class="form-group">
-                    <label for="newsTags">Теги (через запятую)</label>
-                    <input type="text" id="newsTags" class="form-control" placeholder="халяль, джума-намаз, свадьбы">
-                </div>
-                <div class="form-group">
-                    <label for="newsContent">Текст новости</label>
-                    <textarea id="newsContent" class="form-control" rows="5" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="newsImage">Ссылка на изображение</label>
-                    <input type="text" id="newsImage" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-block">Добавить новость</button>
-            </form>
+            </div>
+            
+            <!-- Редактирование информации о селе -->
+            <div class="tab-content" id="aboutTab">
+                <h3>Редактирование информации о селе</h3>
+                <form id="aboutForm">
+                    <div class="form-group">
+                        <label for="aboutContent">Описание села</label>
+                        <textarea id="aboutContentEdit" class="form-control" rows="8" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block">Сохранить изменения</button>
+                </form>
+            </div>
+            
+            <!-- Настройки сайта -->
+            <div class="tab-content" id="settingsTab">
+                <h3>Настройки сайта</h3>
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label for="siteTitle">Название сайта</label>
+                        <input type="text" id="siteTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Новый пароль администратора</label>
+                        <input type="password" id="adminPassword" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Подтвердите пароль</label>
+                        <input type="password" id="confirmPassword" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-block">Сохранить настройки</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
         // Инициализация данных
-        const newsData = [
-            {
-                id: 1,
-                title: "Празднование Ураза-Байрам в селе",
-                date: "21 апреля 2023",
-                category: "Религия",
-                tags: ["халяль", "праздник", "ураза"],
-                content: "Вчера жители села Хупри собрались для совместной молитвы и празднования Ураза-Байрам. После намаза состоялось традиционное угощение и общение.",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-            },
-            {
-                id: 2,
-                title: "Открытие новой школы",
-                date: "15 сентября 2023",
-                category: "События",
-                tags: ["образование", "дети", "развитие"],
-                content: "В селе Хупри состоялось торжественное открытие новой современной школы. Теперь наши дети будут учиться в комфортных условиях с новым оборудованием.",
-                image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-            },
-            {
-                id: 3,
-                title: "Фестиваль горного чая",
-                date: "5 августа 2023",
-                category: "Традиции",
-                tags: ["традиции", "чай", "фестиваль"],
-                content: "В эти выходные в Хупри прошел ежегодный фестиваль горного чая. Жители демонстрировали искусство приготовления традиционных дагестанских чаев.",
-                image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+        let siteData = {
+            news: [],
+            gallery: [],
+            about: "Село Хупри расположено в живописных горах Цунтинского района Дагестана. Это место удивительной природной красоты, где горные вершины касаются небес, а чистый воздух наполняет силой и энергией.\n\nЖители села исповедуют ислам, который играет важную роль в культурной и общественной жизни. Традиции и обычаи передаются из поколения в поколение, сохраняя уникальную идентичность нашего народа.\n\nХупри славится своими гостеприимными жителями, традиционными ремёслами и уникальной кухней. Каждый уголок этого села пропитан историей и духом горного Дагестана.",
+            settings: {
+                title: "Хупри - Горная жемчужина Дагестана",
+                adminPassword: "хупри2024"
             }
-        ];
+        };
+
+        // Загрузка данных из localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('siteData');
+            if (savedData) {
+                siteData = JSON.parse(savedData);
+            }
+        }
+
+        // Сохранение данных в localStorage
+        function saveData() {
+            localStorage.setItem('siteData', JSON.stringify(siteData));
+        }
 
         // DOM элементы
         const menuBtn = document.getElementById('menuBtn');
@@ -998,12 +988,31 @@
         const loginModal = document.getElementById('loginModal');
         const closeLogin = document.getElementById('closeLogin');
         const loginForm = document.getElementById('loginForm');
-        const addNewsModal = document.getElementById('addNewsModal');
-        const closeNews = document.getElementById('closeNews');
+        const adminPanelModal = document.getElementById('adminPanelModal');
+        const closeAdmin = document.getElementById('closeAdmin');
         const newsForm = document.getElementById('newsForm');
+        const galleryForm = document.getElementById('galleryForm');
+        const aboutForm = document.getElementById('aboutForm');
+        const settingsForm = document.getElementById('settingsForm');
         const newsContainer = document.getElementById('newsContainer');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const aboutContent = document.getElementById('aboutContent');
         const filterBtns = document.querySelectorAll('.filter-btn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const newsManagement = document.getElementById('newsManagement');
+        const galleryManagement = document.getElementById('galleryManagement');
+
+        // Загрузка данных при запуске
+        loadData();
+        
+        // Обновление информации на странице
+        function updatePageContent() {
+            renderNews();
+            renderGallery();
+            aboutContent.innerHTML = siteData.about.replace(/\n/g, '<br>');
+            document.title = siteData.settings.title;
+            document.querySelector('.logo h1').textContent = siteData.settings.title;
+        }
 
         // Переключение мобильного меню
         menuBtn.addEventListener('click', () => {
@@ -1040,8 +1049,8 @@
             loginModal.style.display = 'none';
         });
 
-        closeNews.addEventListener('click', () => {
-            addNewsModal.style.display = 'none';
+        closeAdmin.addEventListener('click', () => {
+            adminPanelModal.style.display = 'none';
         });
 
         // Обработка входа
@@ -1050,14 +1059,27 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            if (username === 'admin' && password === 'хупри2024') {
-                alert('Успешный вход! Теперь вы можете добавлять новости.');
+            if (username === 'admin' && password === siteData.settings.adminPassword) {
                 loginModal.style.display = 'none';
-                addNewsModal.style.display = 'flex';
+                adminPanelModal.style.display = 'flex';
+                initAdminPanel();
             } else {
                 alert('Неверный логин или пароль!');
             }
         });
+
+        // Инициализация админ-панели
+        function initAdminPanel() {
+            // Заполнение форм текущими данными
+            document.getElementById('aboutContentEdit').value = siteData.about;
+            document.getElementById('siteTitle').value = siteData.settings.title;
+            
+            // Отрисовка управления новостями
+            renderNewsManagement();
+            
+            // Отрисовка управления галереей
+            renderGalleryManagement();
+        }
 
         // Добавление новости
         newsForm.addEventListener('submit', (e) => {
@@ -1067,47 +1089,134 @@
             const category = document.getElementById('newsCategory').value;
             const tags = document.getElementById('newsTags').value.split(',').map(tag => tag.trim());
             const content = document.getElementById('newsContent').value;
-            const image = document.getElementById('newsImage').value || 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80';
+            const imageInput = document.getElementById('newsImage');
             
-            const newNews = {
-                id: newsData.length + 1,
-                title,
-                date: new Date().toLocaleDateString('ru-RU', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                }),
-                category,
-                tags,
-                content,
-                image
+            // Обработка загрузки изображения
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const newNews = {
+                    id: Date.now(),
+                    title,
+                    date: new Date().toLocaleDateString('ru-RU', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    }),
+                    category,
+                    tags,
+                    content,
+                    image: event.target.result
+                };
+                
+                siteData.news.unshift(newNews);
+                saveData();
+                renderNews();
+                renderNewsManagement();
+                
+                alert('Новость успешно добавлена!');
+                newsForm.reset();
             };
             
-            newsData.unshift(newNews);
-            renderNews();
+            if (imageInput.files.length > 0) {
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                alert('Пожалуйста, выберите изображение!');
+            }
+        });
+
+        // Добавление фото в галерею
+        galleryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             
-            alert('Новость успешно добавлена!');
-            newsForm.reset();
-            addNewsModal.style.display = 'none';
+            const category = document.getElementById('galleryCategory').value;
+            const title = document.getElementById('galleryTitle').value;
+            const description = document.getElementById('galleryDescription').value;
+            const imageInput = document.getElementById('galleryImage');
+            
+            // Обработка загрузки изображения
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const newGalleryItem = {
+                    id: Date.now(),
+                    category,
+                    title,
+                    description,
+                    image: event.target.result
+                };
+                
+                siteData.gallery.push(newGalleryItem);
+                saveData();
+                renderGallery();
+                renderGalleryManagement();
+                
+                alert('Фото успешно добавлено в галерею!');
+                galleryForm.reset();
+            };
+            
+            if (imageInput.files.length > 0) {
+                reader.readAsDataURL(imageInput.files[0]);
+            }
+        });
+
+        // Обновление информации о селе
+        aboutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            siteData.about = document.getElementById('aboutContentEdit').value;
+            saveData();
+            aboutContent.innerHTML = siteData.about.replace(/\n/g, '<br>');
+            alert('Информация о селе успешно обновлена!');
+        });
+
+        // Обновление настроек
+        settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const newTitle = document.getElementById('siteTitle').value;
+            const newPassword = document.getElementById('adminPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            siteData.settings.title = newTitle;
+            
+            if (newPassword && newPassword === confirmPassword) {
+                siteData.settings.adminPassword = newPassword;
+                alert('Пароль успешно изменен!');
+            } else if (newPassword) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+            
+            saveData();
+            updatePageContent();
+            alert('Настройки успешно сохранены!');
         });
 
         // Фильтрация галереи
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Удаляем активный класс у всех кнопок
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Добавляем активный класс текущей кнопке
                 btn.classList.add('active');
                 
                 const filter = btn.getAttribute('data-filter');
+                renderGallery(filter);
+            });
+        });
+
+        // Переключение вкладок в админ-панели
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
                 
-                galleryItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
+                // Скрыть все вкладки
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
                 });
+                
+                // Деактивировать все кнопки
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                // Показать выбранную вкладку
+                document.getElementById(tabId + 'Tab').classList.add('active');
+                btn.classList.add('active');
             });
         });
 
@@ -1115,7 +1224,7 @@
         function renderNews() {
             newsContainer.innerHTML = '';
             
-            newsData.forEach(item => {
+            siteData.news.forEach(item => {
                 const newsCard = document.createElement('div');
                 newsCard.className = 'news-card';
                 
@@ -1142,6 +1251,108 @@
             });
         }
 
+        // Рендер галереи
+        function renderGallery(filter = 'all') {
+            galleryGrid.innerHTML = '';
+            
+            siteData.gallery.forEach(item => {
+                if (filter !== 'all' && item.category !== filter) return;
+                
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.setAttribute('data-category', item.category);
+                
+                galleryItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="overlay">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+
+        // Рендер управления новостями
+        function renderNewsManagement() {
+            newsManagement.innerHTML = '';
+            
+            siteData.news.forEach((news, index) => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-management-item';
+                newsItem.style.display = 'flex';
+                newsItem.style.justifyContent = 'space-between';
+                newsItem.style.alignItems = 'center';
+                newsItem.style.padding = '10px';
+                newsItem.style.borderBottom = '1px solid #eee';
+                
+                newsItem.innerHTML = `
+                    <div>
+                        <strong>${news.title}</strong>
+                        <div style="font-size: 0.8rem; color: #666;">${news.date}</div>
+                    </div>
+                    <button class="btn delete-news" data-index="${index}" style="background: #e74c3c; padding: 5px 10px; font-size: 0.9rem;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                newsManagement.appendChild(newsItem);
+            });
+            
+            // Добавление обработчиков удаления
+            document.querySelectorAll('.delete-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    siteData.news.splice(index, 1);
+                    saveData();
+                    renderNews();
+                    renderNewsManagement();
+                });
+            });
+        }
+
+        // Рендер управления галереей
+        function renderGalleryManagement() {
+            galleryManagement.innerHTML = '';
+            
+            siteData.gallery.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-management-item';
+                galleryItem.style.display = 'flex';
+                galleryItem.style.justifyContent = 'space-between';
+                galleryItem.style.alignItems = 'center';
+                galleryItem.style.padding = '10px';
+                galleryItem.style.borderBottom = '1px solid #eee';
+                
+                galleryItem.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${item.image}" alt="${item.title}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                        <div>
+                            <strong>${item.title}</strong>
+                            <div style="font-size: 0.8rem; color: #666;">${item.category}</div>
+                        </div>
+                    </div>
+                    <button class="btn delete-gallery" data-index="${index}" style="background: #e74c3c; padding: 5px 10px; font-size: 0.9rem;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                galleryManagement.appendChild(galleryItem);
+            });
+            
+            // Добавление обработчиков удаления
+            document.querySelectorAll('.delete-gallery').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    siteData.gallery.splice(index, 1);
+                    saveData();
+                    renderGallery();
+                    renderGalleryManagement();
+                });
+            });
+        }
+
         // Создание водопада
         function createWaterfall() {
             const waterfall = document.getElementById('waterfall');
@@ -1155,33 +1366,17 @@
             }
         }
 
-        // Анимация при прокрутке
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            document.querySelectorAll('.gallery-item, .news-card, .map-container').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
-            renderNews();
+            // Загрузка данных и обновление страницы
+            loadData();
+            updatePageContent();
             createWaterfall();
-            initScrollAnimations();
             
             // Закрытие модальных окон при клике вне контента
             window.addEventListener('click', (e) => {
                 if (e.target === loginModal) loginModal.style.display = 'none';
-                if (e.target === addNewsModal) addNewsModal.style.display = 'none';
+                if (e.target === adminPanelModal) adminPanelModal.style.display = 'none';
             });
         });
     </script>
